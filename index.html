@@ -95,13 +95,65 @@
                 margin: 10px 0;
             }
         }
+
+        #about {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .personal-statement {
+            display: grid;
+            /* grid-template-columns: 3fr 1fr; */
+            gap: 30px;
+            padding: 25px;
+        }
+
+        .highlight {
+            font-size: 1.1em;
+            line-height: 1.8;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .research-focus {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .research-focus h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .academic-badge {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .academic-badge img {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .personal-statement {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <!-- <img src="your-photo.jpg" alt="李明" class="profile-img"> -->
         <h1>Gong Ying</h1>
-        <p>Master student in Robotics and Autonomous Systems</p>
+        <p>Master student in Robotics and Autonomous Systems, University of Macau</p>
+        <p>State Key Laboratory of Internet of Things for Smart City</p>
         <div class="social-links">
             <a href="mailto:mc35214@um.edu.mo"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/Vhyrsd"><i class="fab fa-github"></i></a>
@@ -115,21 +167,50 @@
             <a href="#education">Education</a>
             <a href="#publications">Publications</a>
             <!-- <a href="#research">研究方向</a> -->
+            <a href="#awards">Awards and Honors</a>
+            <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
+
+    <section id="about" class="container">
+        <h2><i class="fas fa-user-graduate"></i> Personal Statement</h2>
+        <div class="personal-statement">
+            <div class="statement-content">
+                <p class="highlight">
+                    I am currently a second-year master student majoring in Robotics and Autonomous Systems, and I am expected to graduate in June 2025.
+                    My work focuses on robotic manipulation and deep learning. 
+                    </br>
+                    I will continue to pursue my PhD in Electromechanical Engineering at University of Macau.
+                </p>
+                
+                <!-- <div class="research-focus">
+                    <h3>学术追求：</h3>
+                    <ul>
+                        <li>探索可解释性AI在医疗决策中的应用</li>
+                        <li>开发低资源环境下的轻量化诊断模型</li>
+                        <li>构建医疗数据隐私保护新范式</li>
+                    </ul>
+                </div> -->
+            </div>
+            <!-- <div class="academic-badge">
+                <img src="lab-logo.png" alt="实验室徽章">
+                <p>清华大学智能医疗实验室</p>
+            </div> -->
+        </div>
+    </section>
 
     <main class="container">
         <section id="education">
             <h2>Education</h2>
             <div class="timeline">
-                <h3>University of Macau - Robotics and Autonomous Systems</h3>
+                <h3>University of Macau (Macao SAR) - Robotics and Autonomous Systems</h3>
                 <p>Master student | 2023-now</p>
                 <ul>
                     <li>Research directions: robot learning, imitation learning.</li>
                 </ul>
 
-                <h3>Northwestern Polytechnical University - Software Engineering</h3>
+                <h3>Northwestern Polytechnical University (China) - Software Engineering</h3>
                 <p>Bachelor | 2018-2022</p>
             </div>
         </section>
@@ -144,6 +225,37 @@
             </div>
         </section>
 
+        <section id="awards">
+            <h2>Awards and Honors</h2>
+            <div class="timeline">
+                <h3>18th "Challenge Cup" National College Student Curricular Academic
+                    Science and Technology Works Competition</h3>
+                <p>Grand Prize | 2023</p>
+                <ul>
+                    <li>《基于物联网边缘计算和多维度安全监控的智慧电梯系统》</li>
+                </ul>
+
+                <h3>Scholarship of School of Software (Northwestern Polytechnical University)</h3>
+                <p>School of Software | 2019</p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="timeline">
+                <h3>Automatic Generation of Bareheaded Photos Based on Light and
+                    Color Space Adjustments</h3>
+                <p>Graduation Design | 2021.9-2022.6</p>
+
+                <h3>Research on Pilot Fatigue Detection System Based on Machine
+                    Vision</h3>
+                <p>College Students' Innovative Entrepreneurial Training Plan Program | 2019</p>
+                <ul>
+                    <li>Provincial Program, Excellent Grade</li>
+                </ul>
+            </div>
+        </section>
+
         <section id="contact">
             <h2>Contact</h2>
             <p>E-mail: mc35214@um.edu.mo, 200082gy@gmail.com</p>
@@ -153,5 +265,82 @@
     <!-- <footer>
         <p>© 2025 Gong Ying - All rights reserved.</p>
     </footer> -->
+    <!-- 在body结束标签前添加按钮 -->
+    <button id="backToTop" class="back-to-top" aria-label="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <style>
+    /* 添加CSS样式 */
+    .back-to-top {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .back-to-top.show {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        background-color: #1a252f;
+        box-shadow: 0 7px 20px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+        .back-to-top {
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+        }
+    }
+    </style>
+
+    <script>
+    // 添加JavaScript
+    const backToTopButton = document.getElementById('backToTop');
+
+    // 滚动事件监听
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
+
+    // 平滑滚动功能
+    backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // 键盘可访问性
+    backToTopButton.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+    </script>
 </body>
 </html>
