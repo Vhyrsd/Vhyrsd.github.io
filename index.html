@@ -1,81 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <title>GONG Ying</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gong Ying</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+        }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+        }
+
+        section {
+            padding: 50px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .publication-item {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                text-align: center;
+            }
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
-<div id="self_intro">
-  <div id="name">
-    GONG Ying
-  </div>
-  <div id="email">
-    gong.ying@connect.um.edu.mo
-  </div>
-  <div id="brief">
-    I am a master student in State Key Laboratory of Internet of Things for Smart City (IOTSC) in University of Macau,
-    majoring in robotics and autonomous systems.
-    My research interests are reinforcement learning and computer vision.
-  </div>
-</div>
+<body>
+    <header>
+        <!-- <img src="your-photo.jpg" alt="李明" class="profile-img"> -->
+        <h1>Gong Ying</h1>
+        <p>Master student in Robotics and Autonomous Systems</p>
+        <div class="social-links">
+            <a href="mailto:mc35214@um.edu.mo"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/Vhyrsd"><i class="fab fa-github"></i></a>
+            <!-- <a href="https://scholar.google.com/citations?user=ID"><i class="fas fa-graduation-cap"></i></a>
+            <a href="https://linkedin.com/in/yourprofile"><i class="fab fa-linkedin"></i></a> -->
+        </div>
+    </header>
 
-<div>
-  <h4 id="education">
-    Education
-  </h4>
-  <table class="table_edu">
-    <tbody>
-      <tr>
-        <td>
-          (Candidate) Master in Robotics and Autonomous Systems
-        </td>
-        <td>
-          University of Macau (Macao SAR)
-        </td>
-        <td>
-          2023 - Current
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Bachelor in Software Engineering
-        </td>
-        <td>
-          Northwestern Polytechnical University (China)
-        </td>
-        <td>
-          2018 - 2022
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <nav>
+        <div class="container">
+            <a href="#education">Education</a>
+            <a href="#publications">Publications</a>
+            <!-- <a href="#research">研究方向</a> -->
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-<div>
-  <h4 id="education">
-    Awards
-  </h4>
-  <table class="table_awards">
-    <tbody>
-      <tr>
-        <td>
-          Grand Prize
-        </td>
-        <td>
-          "Challenge Cup" National College Student Curricular Academic Science and Technology Works Competition
-        </td>
-        <td>
-          2023
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Scholarship of School of Software
-        </td>
-        <td>
-          Northwestern Polytechnical University (China)
-        </td>
-        <td>
-          2020
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <main class="container">
+        <section id="education">
+            <h2>Education</h2>
+            <div class="timeline">
+                <h3>University of Macau - Robotics and Autonomous Systems</h3>
+                <p>Master student | 2023-now</p>
+                <ul>
+                    <li>Research directions: robot learning, imitation learning.</li>
+                </ul>
+
+                <h3>Northwestern Polytechnical University - Software Engineering</h3>
+                <p>Bachelor | 2018-2022</p>
+            </div>
+        </section>
+
+        <section id="publications">
+            <h2>Publications</h2>
+            <div class="publication-item">
+                <b>Gong Y</b>, Liang W, Liu Y, et al. Prior Diffusion Policy Guided by Pre-trained Models for Robot Learning[C]. IROS, 2025. (Under Review)
+            </div>
+            <div class="publication-item">
+                Gao D, <b>Gong Y</b>, Cao J, et al. ResShift-4E: Improved Diffusion Model for Super-Resolution with Microscopy Images[J]. Electronics, 2025, 14(3): 479.
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>E-mail: mc35214@um.edu.mo, 200082gy@gmail.com</p>
+        </section>
+    </main>
+
+    <!-- <footer>
+        <p>© 2025 Gong Ying - All rights reserved.</p>
+    </footer> -->
+</body>
+</html>
