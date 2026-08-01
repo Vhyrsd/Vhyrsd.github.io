@@ -615,41 +615,6 @@
             border-radius: 12px;
         }
 
-        .visitor-layout {
-            display: flex;
-            justify-content: center;
-        }
-
-        .visitor-stats {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            width: min(100%, 520px);
-        }
-
-        .visitor-stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            padding: 20px 18px;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 10px;
-        }
-
-        .visitor-num {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--accent-strong);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .visitor-label {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
         .award-band {
             color: var(--ink);
             background: var(--surface-alt);
@@ -879,10 +844,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .visitor-stats {
-                grid-template-columns: 1fr;
-            }
-
             .publication {
                 grid-template-columns: 100px minmax(0, 1fr);
                 gap: 20px;
@@ -1047,7 +1008,6 @@
                     <li><a href="#publications" data-i18n="nav.publications">Publications</a></li>
                     <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
                     <li><a href="#awards" data-i18n="nav.awards">Awards</a></li>
-                    <li><a href="#visitors" data-i18n="nav.visitors">Visitors</a></li>
                     <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <div class="nav-actions">
@@ -1261,28 +1221,6 @@
             </div>
         </section>
 
-        <section class="content-section alt reveal" id="visitors">
-            <div class="shell">
-                <div class="section-intro">
-                    <div class="section-heading">
-                        <h2 data-i18n="visitors.heading">Visitors</h2>
-                    </div>
-                </div>
-                <div class="visitor-layout">
-                    <div class="visitor-stats" aria-label="Site statistics">
-                        <div class="visitor-stat">
-                            <span class="visitor-num" id="busuanzi_value_site_pv">0</span>
-                            <span class="visitor-label" data-i18n="visitors.pv">Total views</span>
-                        </div>
-                        <div class="visitor-stat">
-                            <span class="visitor-num" id="busuanzi_value_site_uv">0</span>
-                            <span class="visitor-label" data-i18n="visitors.uv">Unique visitors</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="contact-section reveal" id="contact">
             <div class="shell">
                 <div class="contact-layout">
@@ -1328,7 +1266,6 @@
                 "nav.experience": "Experience",
                 "nav.awards": "Awards",
                 "nav.contact": "Contact information",
-                "nav.visitors": "Visitors",
                 "hero.eyebrow": "PhD student &middot; Robot learning",
                 "hero.role": "PhD student in Electromechanical Engineering at the University of Macau, working on learning-based robotic manipulation.",
                 "hero.pubs": "Publications",
@@ -1358,9 +1295,6 @@
                 "status.published": "Published",
                 "contact.copy": "For research discussions or collaboration, please reach me by academic email.",
                 "footer.back": "Back to introduction",
-                "visitors.heading": "Visitors",
-                "visitors.pv": "Total views",
-                "visitors.uv": "Unique visitors",
                 "theme.dark": "Switch to dark theme",
                 "theme.light": "Switch to light theme",
                 "theme.title": "Switch theme",
@@ -1375,7 +1309,6 @@
                 "nav.experience": "教育经历",
                 "nav.awards": "荣誉奖项",
                 "nav.contact": "联系方式",
-                "nav.visitors": "访客统计",
                 "hero.eyebrow": "博士生 &middot; 机器人学习",
                 "hero.role": "澳门大学机电工程系博士生，致力于基于学习的机器人操作研究。",
                 "hero.pubs": "论文发表",
@@ -1403,9 +1336,6 @@
                 "status.published": "已发表",
                 "contact.copy": "如有研究讨论或合作意向，欢迎通过学术邮箱与我联系。",
                 "footer.back": "返回顶部",
-                "visitors.heading": "访客统计",
-                "visitors.pv": "总访问量",
-                "visitors.uv": "独立访客",
                 "theme.dark": "切换到深色主题",
                 "theme.light": "切换到浅色主题",
                 "theme.title": "切换主题",
@@ -1420,7 +1350,6 @@
                 "nav.experience": "経歴",
                 "nav.awards": "受賞歴",
                 "nav.contact": "連絡先",
-                "nav.visitors": "訪問者",
                 "hero.eyebrow": "博士課程 &middot; ロボット学習",
                 "hero.role": "マカオ大学電気機械工学科の博士課程学生。学習に基づくロボット操作を研究しています。",
                 "hero.pubs": "論文",
@@ -1448,9 +1377,6 @@
                 "status.published": "掲載済み",
                 "contact.copy": "研究のご相談や共同研究は、アカデミックメールでお気軽にご連絡ください。",
                 "footer.back": "トップへ戻る",
-                "visitors.heading": "訪問者",
-                "visitors.pv": "総閲覧数",
-                "visitors.uv": "ユニーク訪問者",
                 "theme.dark": "ダークテーマに切替",
                 "theme.light": "ライトテーマに切替",
                 "theme.title": "テーマ切替",
@@ -1568,6 +1494,5 @@
             .filter(Boolean)
             .forEach(section => activeObserver.observe(section));
     </script>
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
