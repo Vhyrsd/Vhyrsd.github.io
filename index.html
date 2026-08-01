@@ -6,8 +6,19 @@
     <meta name="description" content="Gong Ying is a PhD student at the University of Macau researching robot learning, imitation learning, and vision-language-action models.">
     <meta name="theme-color" content="#f7f6f8">
     <title>Gong Ying | Robot Learning Researcher</title>
+    <script>
+        try {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+            const savedLang = localStorage.getItem("lang");
+            const lang = savedLang || "en";
+            document.documentElement.lang = lang === "zh" ? "zh-CN" : lang === "ja" ? "ja" : "en";
+        } catch (err) {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -228,6 +239,39 @@
             border-color: var(--line);
         }
 
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            margin-left: 2px;
+            padding-left: 12px;
+            border-left: 1px solid var(--line);
+        }
+
+        .lang-btn {
+            min-width: 30px;
+            padding: 5px 7px;
+            color: var(--muted);
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1;
+            transition: color .2s ease, background-color .2s ease;
+        }
+
+        .lang-btn:hover {
+            color: var(--accent-strong);
+        }
+
+        .lang-btn[aria-pressed="true"] {
+            color: #fff;
+            background: var(--accent-strong);
+        }
+
         .menu-toggle {
             display: none;
         }
@@ -396,28 +440,29 @@
         }
 
         .focus-item {
-            display: grid;
-            grid-template-columns: 42px 1fr;
-            gap: 12px;
-            padding: 17px 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
             border-bottom: 1px solid var(--line);
         }
 
-        .focus-index {
+        .focus-item i {
+            display: grid;
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            place-items: center;
             color: var(--highlight);
-            font-size: 13px;
-            font-weight: 700;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 17px;
         }
 
         .focus-item h3 {
-            margin: 0 0 4px;
-            font-size: 16px;
-        }
-
-        .focus-item p {
             margin: 0;
-            color: var(--muted);
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .publication-list {
@@ -551,6 +596,23 @@
             margin: 7px 0 0;
             color: var(--muted);
             font-size: 14px;
+        }
+
+        .edu-entry {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .edu-logo {
+            flex-shrink: 0;
+            width: 132px;
+            height: 132px;
+            object-fit: contain;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
         }
 
         .award-band {
@@ -932,7 +994,7 @@
     <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <a class="skip-link" href="#main-content" data-i18n="skip">Skip to main content</a>
 
     <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
         <div class="shell nav-inner">
@@ -942,13 +1004,18 @@
             </a>
             <div class="nav-cluster">
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#awards">Awards</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#publications" data-i18n="nav.publications">Publications</a></li>
+                    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+                    <li><a href="#awards" data-i18n="nav.awards">Awards</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <div class="nav-actions">
+                    <div class="lang-switch" role="group" aria-label="Language">
+                        <button class="lang-btn" type="button" data-lang="en" aria-label="English">EN</button>
+                        <button class="lang-btn" type="button" data-lang="zh" aria-label="中文">中</button>
+                        <button class="lang-btn" type="button" data-lang="ja" aria-label="日本語">日</button>
+                    </div>
                     <button class="icon-button" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
                         <i class="fas fa-moon" aria-hidden="true"></i>
                     </button>
@@ -962,15 +1029,18 @@
 
     <header class="hero" id="top">
         <figure class="hero-media" aria-hidden="true">
-            <img src="resources/imgs/000006-4.jpg" alt="" fetchpriority="high">
+            <picture>
+                <source srcset="resources/imgs/000006-4.webp" type="image/webp">
+                <img src="resources/imgs/000006-4.jpg" alt="" fetchpriority="high">
+            </picture>
         </figure>
         <div class="shell hero-content">
             <div class="hero-copy">
-                <p class="eyebrow">PhD student &middot; Robot learning</p>
+                <p class="eyebrow" data-i18n="hero.eyebrow">PhD student &middot; Robot learning</p>
                 <h1>Gong Ying</h1>
-                <p class="hero-role">PhD student in Electromechanical Engineering at the University of Macau, working on learning-based robotic manipulation.</p>
+                <p class="hero-role" data-i18n="hero.role">PhD student in Electromechanical Engineering at the University of Macau, working on learning-based robotic manipulation.</p>
                 <div class="hero-actions">
-                    <a class="button" href="#publications"><i class="fas fa-file-alt" aria-hidden="true"></i> Publications</a>
+                    <a class="button" href="#publications"><i class="fas fa-file-alt" aria-hidden="true"></i> <span data-i18n="hero.pubs">Publications</span></a>
                     <a class="button secondary" href="https://github.com/Vhyrsd" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
                 </div>
             </div>
@@ -987,30 +1057,21 @@
                 </div>
                 <div class="profile-grid">
                     <div class="profile-copy">
-                        <p>I am a first-year PhD student in <strong>Electromechanical Engineering</strong> at the University of Macau.</p>
-                        <p>My research explores how robots can learn manipulation skills from data and human demonstrations. I am particularly interested in policies that remain efficient, robust, and transferable beyond a single task setting.</p>
+                        <p data-i18n="about.p1">I am a first-year PhD student in <strong>Electromechanical Engineering</strong> at the University of Macau.</p>
+                        <p data-i18n="about.p2">My research explores how robots can learn manipulation skills from data and human demonstrations. I am particularly interested in policies that remain efficient, robust, and transferable beyond a single task setting.</p>
                     </div>
                     <div class="focus-list" aria-label="Research interests">
                         <div class="focus-item">
-                            <span class="focus-index">01</span>
-                            <div>
-                                <h3>Robot learning</h3>
-                                <p>Generalizable policies for manipulation and embodied decision-making.</p>
-                            </div>
+                            <i class="fas fa-robot" aria-hidden="true"></i>
+                            <h3 data-i18n="interest.robot">Robot learning</h3>
                         </div>
                         <div class="focus-item">
-                            <span class="focus-index">02</span>
-                            <div>
-                                <h3>Imitation learning</h3>
-                                <p>Learning effective behaviors from demonstrations and human guidance.</p>
-                            </div>
+                            <i class="fas fa-clone" aria-hidden="true"></i>
+                            <h3 data-i18n="interest.imitation">Imitation learning</h3>
                         </div>
                         <div class="focus-item">
-                            <span class="focus-index">03</span>
-                            <div>
-                                <h3>Diffusion policy</h3>
-                                <p>Action-aware representations and generative control policies.</p>
-                            </div>
+                            <i class="fas fa-wave-square" aria-hidden="true"></i>
+                            <h3 data-i18n="interest.diffusion">Diffusion policy</h3>
                         </div>
                     </div>
                 </div>
@@ -1021,8 +1082,7 @@
             <div class="shell">
                 <div class="section-intro">
                     <div class="section-heading">
-                        <h2>Publications</h2>
-                        <p>Work across vision-language-action models, diffusion policies, robust robot learning, and image restoration.</p>
+                        <h2 data-i18n="nav.publications">Publications</h2>
                     </div>
                 </div>
                 <ol class="publication-list">
@@ -1032,7 +1092,7 @@
                             <h3>Lightweight spatial-view residual adaptation for vision-language-action models toward amphibious-robot-oriented manipulation</h3>
                             <p><b>Gong, Y.</b>, Mai, Z., Zhao, Z., Bai, G., Qin, H., &amp; Yang, Z. X. &middot; <cite>2026 IEEE International Conference on Unmanned Systems</cite></p>
                         </article>
-                        <span class="pub-status">Accepted</span>
+                        <span class="pub-status" data-i18n="status.accepted">Accepted</span>
                     </li>
                     <li class="publication">
                         <div class="pub-venue">IEEE T-ASE <span>2026</span></div>
@@ -1040,7 +1100,7 @@
                             <h3>Policy-initialized diffusion for robot manipulation with action-aware representation learning</h3>
                             <p><b>Gong, Y.</b>, Liang, W., Liu, Y., &amp; Yang, Z. X. &middot; <cite>IEEE Transactions on Automation Science and Engineering</cite></p>
                         </article>
-                        <span class="pub-status review">Under review</span>
+                        <span class="pub-status review" data-i18n="status.review">Under review</span>
                     </li>
                     <li class="publication">
                         <div class="pub-venue">IEEE TII <span>2026</span></div>
@@ -1048,7 +1108,7 @@
                             <h3>Double diffusion policy for robust robot learning via human guidance</h3>
                             <p>Liang, W., <b>Gong, Y.</b>, Li, X., et al. &middot; <cite>IEEE Transactions on Industrial Informatics</cite></p>
                         </article>
-                        <span class="pub-status">Published</span>
+                        <span class="pub-status" data-i18n="status.published">Published</span>
                     </li>
                     <li class="publication">
                         <div class="pub-venue">Electronics <span>2025</span></div>
@@ -1056,7 +1116,7 @@
                             <h3>ResShift-4E: Improved diffusion model for super-resolution with microscopy images</h3>
                             <p>Gao, D., <b>Gong, Y.</b>, Cao, J., et al. &middot; <cite>Electronics, 14(3), 479</cite></p>
                         </article>
-                        <span class="pub-status">Published</span>
+                        <span class="pub-status" data-i18n="status.published">Published</span>
                     </li>
                 </ol>
             </div>
@@ -1066,42 +1126,66 @@
             <div class="shell">
                 <div class="section-intro">
                     <div class="section-heading">
-                        <h2>Education and projects</h2>
+                        <h2 data-i18n="exp.heading">Education and projects</h2>
                     </div>
                 </div>
                 <div class="experience-grid">
                     <div>
-                        <h3 class="column-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education</h3>
+                        <h3 class="column-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span data-i18n="exp.education">Education</span></h3>
                         <ol class="timeline">
                             <li class="timeline-item">
                                 <time datetime="2025">2025 - present</time>
-                                <h3>PhD in Electromechanical Engineering</h3>
-                                <p>University of Macau, Macao SAR<br>Robot learning and imitation learning</p>
+                                <div class="edu-entry">
+                                    <picture>
+                                        <source srcset="resources/imgs/um-logo.webp" type="image/webp">
+                                        <img class="edu-logo" src="resources/imgs/um-logo.svg" alt="University of Macau" width="396" height="396" loading="lazy">
+                                    </picture>
+                                    <div class="edu-main">
+                                        <h3 data-i18n="exp.phd">PhD in Electromechanical Engineering</h3>
+                                        <p data-i18n="exp.phd.desc">University of Macau, Macao SAR<br>Robot learning and imitation learning</p>
+                                    </div>
+                                </div>
                             </li>
                             <li class="timeline-item">
                                 <time datetime="2023">2023 - 2025</time>
-                                <h3>MSc in Robotics and Autonomous Systems</h3>
-                                <p>University of Macau, Macao SAR</p>
+                                <div class="edu-entry">
+                                    <picture>
+                                        <source srcset="resources/imgs/um-logo.webp" type="image/webp">
+                                        <img class="edu-logo" src="resources/imgs/um-logo.svg" alt="University of Macau" width="396" height="396" loading="lazy">
+                                    </picture>
+                                    <div class="edu-main">
+                                        <h3 data-i18n="exp.msc">MSc in Robotics and Autonomous Systems</h3>
+                                        <p data-i18n="exp.msc.desc">University of Macau, Macao SAR</p>
+                                    </div>
+                                </div>
                             </li>
                             <li class="timeline-item">
                                 <time datetime="2018">2018 - 2022</time>
-                                <h3>BEng in Software Engineering</h3>
-                                <p>Northwestern Polytechnical University, China</p>
+                                <div class="edu-entry">
+                                    <picture>
+                                        <source srcset="resources/imgs/nwpu-logo.webp" type="image/webp">
+                                        <img class="edu-logo" src="resources/imgs/nwpu-logo.svg" alt="Northwestern Polytechnical University" width="396" height="396" loading="lazy">
+                                    </picture>
+                                    <div class="edu-main">
+                                        <h3 data-i18n="exp.beng">BEng in Software Engineering</h3>
+                                        <p data-i18n="exp.beng.desc">Northwestern Polytechnical University, China</p>
+                                    </div>
+                                </div>
                             </li>
                         </ol>
                     </div>
                     <div>
-                        <h3 class="column-heading"><i class="fas fa-project-diagram" aria-hidden="true"></i> Selected projects</h3>
+                        <h3 class="column-heading"><i class="fas fa-project-diagram" aria-hidden="true"></i> <span data-i18n="exp.projects">Selected projects</span></h3>
                         <ol class="timeline">
                             <li class="timeline-item">
                                 <time datetime="2021-09">Sep 2021 - Jun 2022</time>
-                                <h3>Automatic bareheaded photo generation</h3>
-                                <p>Graduation project using illumination and color-space adjustment.</p>
+                                <h3 data-i18n="exp.proj1.title">Automatic bareheaded photo generation</h3>
+                                <p data-i18n="exp.proj1.desc">Graduation project using illumination and color-space adjustment.</p>
                             </li>
                             <li class="timeline-item">
                                 <time datetime="2019">2019</time>
-                                <h3>Pilot fatigue detection using machine vision</h3>
-                                <p>Provincial-level Innovative Entrepreneurial Training Program, graded Excellent.</p>
+                                <h3 data-i18n="exp.proj2.title">Pilot fatigue detection using machine vision</h3>
+                                <p data-i18n="exp.proj2.desc">Provincial-level Innovative Entrepreneurial Training Program, graded Excellent.</p>
                             </li>
                         </ol>
                     </div>
@@ -1111,15 +1195,25 @@
 
         <section class="award-band reveal" id="awards">
             <div class="shell award-layout">
-                <h2 class="award-heading">Awards</h2>
+                <h2 class="award-heading" data-i18n="nav.awards">Awards</h2>
                 <div class="award-list">
                     <article class="award-item">
-                        <span class="award-meta">Grand Prize &middot; 2023</span>
+                        <span class="award-meta" data-i18n="award.award.2025">Award &middot; 2025</span>
+                        <h3>2025 FST Best MSc Student Award</h3>
+                        <p>University of Macau, Robotics and Autonomous Systems Programme.</p>
+                    </article>
+                    <article class="award-item">
+                        <span class="award-meta" data-i18n="award.award.2025">Award &middot; 2025</span>
+                        <h3>Best MSc Student in Department of Electromechanical Engineering</h3>
+                        <p>University of Macau.</p>
+                    </article>
+                    <article class="award-item">
+                        <span class="award-meta" data-i18n="award.grand.2023">Grand Prize &middot; 2023</span>
                         <h3>18th Challenge Cup National Academic Science and Technology Competition</h3>
                         <p>Smart elevator system based on IoT edge computing and multi-dimensional safety monitoring.</p>
                     </article>
                     <article class="award-item">
-                        <span class="award-meta">Scholarship &middot; 2019</span>
+                        <span class="award-meta" data-i18n="award.scholarship.2019">Scholarship &middot; 2019</span>
                         <h3>School of Software Scholarship</h3>
                         <p>Northwestern Polytechnical University.</p>
                     </article>
@@ -1131,8 +1225,8 @@
             <div class="shell">
                 <div class="contact-layout">
                     <div class="contact-copy">
-                        <h2>Contact information</h2>
-                        <p>For research discussions or collaboration, please reach me by academic email.</p>
+                        <h2 data-i18n="nav.contact">Contact information</h2>
+                        <p data-i18n="contact.copy">For research discussions or collaboration, please reach me by academic email.</p>
                     </div>
                     <div class="contact-actions">
                         <div class="contact-link contact-static"><i class="fas fa-envelope" aria-hidden="true"></i> yc57919 [at] um.edu.mo</div>
@@ -1142,7 +1236,7 @@
                 </div>
                 <footer class="site-footer">
                     <span>&copy; 2026 Gong Ying &middot; University of Macau</span>
-                    <a href="#top">Back to introduction</a>
+                    <a href="#top" data-i18n="footer.back">Back to introduction</a>
                 </footer>
             </div>
         </section>
@@ -1162,26 +1256,182 @@
         const themeIcon = themeToggle.querySelector("i");
         const backToTop = document.getElementById("backToTop");
         const sectionLinks = [...document.querySelectorAll(".nav-links a")];
+        const langButtons = [...document.querySelectorAll(".lang-btn")];
+
+        const I18N = {
+            en: {
+                "skip": "Skip to main content",
+                "nav.about": "About",
+                "nav.publications": "Publications",
+                "nav.experience": "Experience",
+                "nav.awards": "Awards",
+                "nav.contact": "Contact information",
+                "hero.eyebrow": "PhD student &middot; Robot learning",
+                "hero.role": "PhD student in Electromechanical Engineering at the University of Macau, working on learning-based robotic manipulation.",
+                "hero.pubs": "Publications",
+                "about.p1": "I am a first-year PhD student in <strong>Electromechanical Engineering</strong> at the University of Macau.",
+                "about.p2": "My research explores how robots can learn manipulation skills from data and human demonstrations. I am particularly interested in policies that remain efficient, robust, and transferable beyond a single task setting.",
+                "interest.robot": "Robot learning",
+                "interest.imitation": "Imitation learning",
+                "interest.diffusion": "Diffusion policy",
+                "exp.heading": "Education and projects",
+                "exp.education": "Education",
+                "exp.phd": "PhD in Electromechanical Engineering",
+                "exp.phd.desc": "University of Macau, Macao SAR<br>Robot learning and imitation learning",
+                "exp.msc": "MSc in Robotics and Autonomous Systems",
+                "exp.msc.desc": "University of Macau, Macao SAR",
+                "exp.beng": "BEng in Software Engineering",
+                "exp.beng.desc": "Northwestern Polytechnical University, China",
+                "exp.projects": "Selected projects",
+                "exp.proj1.title": "Automatic bareheaded photo generation",
+                "exp.proj1.desc": "Graduation project using illumination and color-space adjustment.",
+                "exp.proj2.title": "Pilot fatigue detection using machine vision",
+                "exp.proj2.desc": "Provincial-level Innovative Entrepreneurial Training Program, graded Excellent.",
+                "award.award.2025": "Award &middot; 2025",
+                "award.grand.2023": "Grand Prize &middot; 2023",
+                "award.scholarship.2019": "Scholarship &middot; 2019",
+                "status.accepted": "Accepted",
+                "status.review": "Under review",
+                "status.published": "Published",
+                "contact.copy": "For research discussions or collaboration, please reach me by academic email.",
+                "footer.back": "Back to introduction",
+                "theme.dark": "Switch to dark theme",
+                "theme.light": "Switch to light theme",
+                "theme.title": "Switch theme",
+                "menu.open": "Open navigation",
+                "menu.close": "Close navigation",
+                "top.title": "Back to top"
+            },
+            zh: {
+                "skip": "跳到主要内容",
+                "nav.about": "关于我",
+                "nav.publications": "论文发表",
+                "nav.experience": "教育经历",
+                "nav.awards": "荣誉奖项",
+                "nav.contact": "联系方式",
+                "hero.eyebrow": "博士生 &middot; 机器人学习",
+                "hero.role": "澳门大学机电工程系博士生，致力于基于学习的机器人操作研究。",
+                "hero.pubs": "论文发表",
+                "about.p1": "我是澳门大学<strong>机电工程</strong>系一年级博士生。",
+                "about.p2": "我的研究探索机器人如何从数据和人类示范中学习操作技能，尤其关注高效、鲁棒且能泛化到单一任务场景之外的策略。",
+                "interest.robot": "机器人学习",
+                "interest.imitation": "模仿学习",
+                "interest.diffusion": "扩散策略",
+                "exp.heading": "教育经历与项目",
+                "exp.education": "教育经历",
+                "exp.phd": "机电工程博士（在读）",
+                "exp.phd.desc": "澳门大学，中国澳门<br>研究方向：机器人学习与模仿学习",
+                "exp.msc": "机器人与自主系统理学硕士",
+                "exp.msc.desc": "澳门大学，中国澳门",
+                "exp.beng": "软件工程工学学士",
+                "exp.beng.desc": "西北工业大学，中国",
+                "exp.projects": "代表性项目",
+                "exp.proj1.desc": "毕业设计，利用光照与色彩空间调整实现。",
+                "exp.proj2.desc": "省级大学生创新训练计划项目，结题评定为优秀。",
+                "award.award.2025": "获奖 &middot; 2025",
+                "award.grand.2023": "特等奖 &middot; 2023",
+                "award.scholarship.2019": "奖学金 &middot; 2019",
+                "status.accepted": "已录用",
+                "status.review": "审稿中",
+                "status.published": "已发表",
+                "contact.copy": "如有研究讨论或合作意向，欢迎通过学术邮箱与我联系。",
+                "footer.back": "返回顶部",
+                "theme.dark": "切换到深色主题",
+                "theme.light": "切换到浅色主题",
+                "theme.title": "切换主题",
+                "menu.open": "打开导航菜单",
+                "menu.close": "关闭导航菜单",
+                "top.title": "返回顶部"
+            },
+            ja: {
+                "skip": "本文へスキップ",
+                "nav.about": "プロフィール",
+                "nav.publications": "論文",
+                "nav.experience": "経歴",
+                "nav.awards": "受賞歴",
+                "nav.contact": "連絡先",
+                "hero.eyebrow": "博士課程 &middot; ロボット学習",
+                "hero.role": "マカオ大学電気機械工学科の博士課程学生。学習に基づくロボット操作を研究しています。",
+                "hero.pubs": "論文",
+                "about.p1": "私はマカオ大学<strong>電気機械工学</strong>専攻の博士課程1年生です。",
+                "about.p2": "ロボットがデータや人のデモンストレーションから操作スキルを学習する方法を研究しています。特に、効率的で堅牢、かつ単一タスクを超えて汎化できるポリシーに興味があります。",
+                "interest.robot": "ロボット学習",
+                "interest.imitation": "模倣学習",
+                "interest.diffusion": "拡散ポリシー",
+                "exp.heading": "学歴・プロジェクト",
+                "exp.education": "学歴",
+                "exp.phd": "電気機械工学博士課程",
+                "exp.phd.desc": "マカオ大学<br>ロボット学習・模倣学習",
+                "exp.msc": "ロボティクス・自律システム修士",
+                "exp.msc.desc": "マカオ大学",
+                "exp.beng": "ソフトウェア工学士",
+                "exp.beng.desc": "西北工業大学",
+                "exp.projects": "プロジェクト",
+                "exp.proj1.desc": "卒業研究。照明と色空間の調整を利用。",
+                "exp.proj2.desc": "省級大学生イノベーション創業訓練プロジェクト（評価：優秀）。",
+                "award.award.2025": "受賞 &middot; 2025",
+                "award.grand.2023": "大賞 &middot; 2023",
+                "award.scholarship.2019": "奨学金 &middot; 2019",
+                "status.accepted": "採録済み",
+                "status.review": "審査中",
+                "status.published": "掲載済み",
+                "contact.copy": "研究のご相談や共同研究は、アカデミックメールでお気軽にご連絡ください。",
+                "footer.back": "トップへ戻る",
+                "theme.dark": "ダークテーマに切替",
+                "theme.light": "ライトテーマに切替",
+                "theme.title": "テーマ切替",
+                "menu.open": "メニューを開く",
+                "menu.close": "メニューを閉じる",
+                "top.title": "トップへ戻る"
+            }
+        };
+
+        let currentLang = "en";
+
+        function t(key) {
+            return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key];
+        }
 
         function applyTheme(theme) {
             const isDark = theme === "dark";
             root.dataset.theme = theme;
             themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
-            themeToggle.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+            themeToggle.setAttribute("aria-label", isDark ? t("theme.light") : t("theme.dark"));
             document.querySelector('meta[name="theme-color"]').content = isDark ? "#17161a" : "#f7f6f8";
+        }
+
+        function applyLanguage(lang) {
+            currentLang = I18N[lang] ? lang : "en";
+            document.documentElement.lang = currentLang === "zh" ? "zh-CN" : currentLang === "ja" ? "ja" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.dataset.i18n;
+                if (I18N[currentLang][key] != null) el.innerHTML = I18N[currentLang][key];
+            });
+            langButtons.forEach(btn => btn.setAttribute("aria-pressed", String(btn.dataset.lang === currentLang)));
+            themeToggle.title = t("theme.title");
+            backToTop.setAttribute("aria-label", t("top.title"));
+            backToTop.title = t("top.title");
+            closeMenu();
+            localStorage.setItem("lang", currentLang);
         }
 
         function closeMenu() {
             navLinks.classList.remove("open");
             document.body.classList.remove("menu-open");
             menuToggle.setAttribute("aria-expanded", "false");
-            menuToggle.setAttribute("aria-label", "Open navigation");
+            menuToggle.setAttribute("aria-label", t("menu.open"));
             menuIcon.className = "fas fa-bars";
         }
 
         const savedTheme = localStorage.getItem("theme");
         const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const savedLang = localStorage.getItem("lang");
+        const detectedLang = savedLang || "en";
+
         applyTheme(savedTheme || preferredTheme);
+        applyLanguage(detectedLang);
+
+        langButtons.forEach(btn => btn.addEventListener("click", () => applyLanguage(btn.dataset.lang)));
 
         themeToggle.addEventListener("click", () => {
             const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
@@ -1194,7 +1444,7 @@
             navLinks.classList.toggle("open", opening);
             document.body.classList.toggle("menu-open", opening);
             menuToggle.setAttribute("aria-expanded", String(opening));
-            menuToggle.setAttribute("aria-label", opening ? "Close navigation" : "Open navigation");
+            menuToggle.setAttribute("aria-label", opening ? t("menu.close") : t("menu.open"));
             menuIcon.className = opening ? "fas fa-times" : "fas fa-bars";
         });
 
@@ -1214,7 +1464,10 @@
             backToTop.classList.toggle("visible", window.scrollY > 520);
         }, { passive: true });
 
-        backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+        });
 
         const revealObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
